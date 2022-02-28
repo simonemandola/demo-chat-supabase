@@ -26,6 +26,14 @@ createApp({
                 .insert([
                     { nombre: this.nombre, mensaje: this.nuevoMensaje },
                 ])
+            const vibrate = window.navigator.vibrate([200, 100, 200]);
+            let notification = new Notification( this.nombre,
+                {
+                    body: this.nuevoMensaje,
+                    vibrate: vibrate,
+                }
+            );
+            console.log(notification);
             this.nombre = "";
             this.nuevoMensaje = "";
         },
@@ -41,6 +49,10 @@ createApp({
     mounted() {
         this.cargarMensajes();
         this.escucharNuevosMensajes();
+        if (Notification.permission !== "granted") {
+            let promise = Notification.requestPermission();
+            console.log(promise);
+        }
     },
     watch: {
         mensajes: {

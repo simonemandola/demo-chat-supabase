@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Chat</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script type="module" src="js/index.js"></script>
+</head>
+<body>
+    <div id="app" class="container">
+        <header>
+            <h1>Chat</h1>
+        </header>
+        <main>
+            <section class="mensajes" ref="mensajesContenedor">
+                <ul class="collection">
+                    <li v-for="mensaje in mensajes"
+                        class="collection-item"
+                    >
+                        <strong>{{ mensaje.nombre }}:</strong> {{ mensaje.mensaje }}
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <div class="row">
+                    <div class="col s10">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input v-model="nombre" type="text" placeholder="Nombre">
+                            </div>
+                            <div class="input-field col s12">
+                                <textarea
+                                        placeholder="Mensaje"
+                                        v-model="nuevoMensaje"
+                                        id="textarea1"
+                                        class="materialize-textarea"
+                                ></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s2">
+                        <button
+                                @click.prevent="enviarMensaje"
+                                class="btn waves-effect waves-light btn__submit"
+                                type="submit"
+                                name="action"
+                        >
+                            Enviar
+                            <i class="material-icons right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

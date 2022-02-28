@@ -26,8 +26,9 @@ createApp({
                 .insert([
                     { nombre: this.nombre, mensaje: this.nuevoMensaje },
                 ])
+            const title = `${this.nombre} ha escrito:`
             const vibrate = window.navigator.vibrate([200, 100, 200]);
-            let notification = new Notification( this.nombre,
+            let notification = new Notification( title,
                 {
                     body: this.nuevoMensaje,
                     vibrate: vibrate,

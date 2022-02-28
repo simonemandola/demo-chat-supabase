@@ -22,6 +22,9 @@ createApp({
                     vibrate: vibrate,
                 }
             );
+            setTimeout(() => {
+                notification.close();
+            }, 2000);
         },
         async cargarMensajes() {
             let {data: data, error } = await cli

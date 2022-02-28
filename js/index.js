@@ -13,6 +13,16 @@ createApp({
         }
     },
     methods: {
+        notifiaction() {
+            const title = `${this.nombre} ha escrito:`
+            const vibrate = window.navigator.vibrate([200, 100, 200]);
+            let notification = new Notification( title,
+                {
+                    body: this.nuevoMensaje,
+                    vibrate: vibrate,
+                }
+            );
+        },
         async cargarMensajes() {
             let {data: data, error } = await cli
                 .from("chat")
@@ -26,15 +36,6 @@ createApp({
                 .insert([
                     { nombre: this.nombre, mensaje: this.nuevoMensaje },
                 ])
-            const title = `${this.nombre} ha escrito:`
-            const vibrate = window.navigator.vibrate([200, 100, 200]);
-            let notification = new Notification( title,
-                {
-                    body: this.nuevoMensaje,
-                    vibrate: vibrate,
-                }
-            );
-            console.log(notification);
             this.nombre = "";
             this.nuevoMensaje = "";
         },
@@ -43,6 +44,7 @@ createApp({
                 .from('chat')
                 .on('INSERT', payload => {
                     this.mensajes.push(payload.new)
+                    this.notifiaction();
                 })
                 .subscribe()
         },
